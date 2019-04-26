@@ -1,5 +1,5 @@
 # Autentication-angular-laravel-5.7-CMS
-JW-AUTH CMS laravel + Angular | Gestor de contenido
+JWT-AUTH CMS laravel + Angular | Gestor de contenido
 
 
 ## Procedemos a configurar el backend
@@ -95,7 +95,13 @@ php artisan migrate --seed
 
 El seeder realiza el registro de un usuarios por defecto `admin@admin.com`  y con password `adminadmin`
 
+
+Con la ayuda de Postman, vamos a probar nuestra API, levantamos nuestro servidor php
     
+```
+php artisan serve
+```
+Ejecutamos postman y agregamos en body las credenciales para poder obtener el token
 
+Al hacer login nos va a devolver un token que podemos utilizar para probar las rutas y con esto confirmar la corecta instalación del backend hasta el moento.
 
-   
