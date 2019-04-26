@@ -2,7 +2,21 @@
 JW-AUTH CMS laravel + Angular | Gestor de contenido
 
 
-### Procedemos a configurar el backend
+## Procedemos a configurar el backend
+
+### Requisitos para poder instalar correctamente el backend
+
+- PHP >= 7.1.3
+- OpenSSL PHP Extension
+- PDO PHP Extension
+- Mbstring PHP Extension
+- Tokenizer PHP Extension
+- XML PHP Extension
+- Ctype PHP Extension
+- JSON PHP Extension
+- BCMath PHP Extension
+
+**Se recomienda** utilizar el empaquetado [xampp](https://www.apachefriends.org/es/index.html) el cual ya trae incluido `MySQL` + `APACHE`, además, deberá contar con la instalación de [composer](https://getcomposer.org/) el cual sera necesario para instalar las librerias de php.
 
 Ingresamos a la carpeta donde se encuentra los archivos del backend
 
@@ -61,7 +75,7 @@ MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
 MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
 ```
 
-Una vez actualizado el archiv `.env` procedemos a ejecutar la siguiente linea de código.
+Una vez actualizado el archivo `.env` procedemos a ejecutar la siguiente linea de código.
 ```
 php artisan key:generate
 ```
