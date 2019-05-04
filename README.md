@@ -75,6 +75,16 @@ MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
 MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
 ```
 
+Reealizamos la configuración de la base de datos
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=homestead  
+DB_USERNAME=homestead
+DB_PASSWORD=secret
+```
+
 Una vez actualizado el archivo `.env` procedemos a ejecutar la siguiente linea de código.
 ```
 php artisan key:generate
@@ -84,8 +94,6 @@ Teniendo ya configurado el anterior archivo procedemos a genera la llave secreta
 ```
 php artisan jwt:secret                                            
 ```
-
-Ahora procedemos a generar el key para el 
 
 Una vez descargadas la dependencias procedemos a ejecutar las migraciones y seeder iniciales
 
