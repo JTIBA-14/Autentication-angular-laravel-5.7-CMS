@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
 import { LoginService } from 'src/app/services/login.service';
-import { AuthorizationtokenService } from 'src/app/services/auth/authorizationtoken.service';
+import { AuthorizationtokenService } from '../../services/auth/authorizationtoken.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,7 +20,9 @@ export class LoginComponent implements OnInit {
 		private formBuilder: FormBuilder, 
 		private _loginService: LoginService,
 		private _tokenService: AuthorizationtokenService,
-		private router: Router) { 
+		private router: Router,
+		private _authService: AuthService) { 
+
 		this.formLogin = this.formBuilder.group({
 			userLogin: [null, [Validators.required, Validators.email]],
 			userPassword: [null, [Validators.required, Validators.minLength(6)]]
@@ -53,6 +56,7 @@ export class LoginComponent implements OnInit {
 	//validacion del token
 	handleResponse( data ){
 		this._tokenService.handle(data.access_token);
+		this._authService.changeAuthStatus(true);
 		this.router.navigateByUrl('profile');
 	}
 

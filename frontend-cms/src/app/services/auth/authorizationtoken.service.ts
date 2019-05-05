@@ -8,12 +8,15 @@ import { GLOBAL } from '../../global';
 export class AuthorizationtokenService {
 
 	private API_URL = GLOBAL.url;
+	private iss = {
+		login: `${this.API_URL}login`,
+		singnup: `${this.API_URL}signup`
+	}
 	
 	constructor() { }
 
 	handle(token){
 		this.setToken(token)
-		console.log(this.isValidToken())
 	}
 
 	//se almacena el token en el localstorage
@@ -36,7 +39,7 @@ export class AuthorizationtokenService {
 		if(token){
 			const payload = this.payloadToken(token);
 			if(payload){
-				return	(payload.iss === `${this.API_URL}login`) ? true : false;
+				return	Object.values(this.iss).indexOf(payload.iss) >-1 ? true : false;
 			}
 		}
 		return false;
@@ -49,5 +52,9 @@ export class AuthorizationtokenService {
 
 	decodePayload(payload){
 		return JSON.parse(atob(payload));
+	}
+
+	loggedIn(){
+		return this.isValidToken();
 	}
 }
