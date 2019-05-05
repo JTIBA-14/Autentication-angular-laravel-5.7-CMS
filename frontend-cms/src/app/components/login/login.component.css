@@ -1,0 +1,13 @@
+.has-error input[type="email"],
+.has-error input[type="password"] {
+    border-color: rgb(216, 12, 12);
+    color: rgb(230, 14, 14);
+}
+
+/* .form-group> .ng-invalid:not(formLogin){
+    border-left: 5px solid red;
+}
+
+.form-group> .ng-valid:not(formLogin){
+    border-left: 5px solid green;
+} */

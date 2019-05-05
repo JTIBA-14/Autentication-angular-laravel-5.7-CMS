@@ -1,34 +1,64 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormControl, ValidatorFn, AbstractControl } from '@angular/forms';
+import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
+import { LoginService } from 'src/app/services/login.service';
+import { AuthorizationtokenService } from 'src/app/services/auth/authorizationtoken.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+	selector: 'app-login',
+	templateUrl: './login.component.html',
+	styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
 
 	public formLogin: FormGroup;
+	isSubmitted = false;
+	public error = null;
 
-
-	constructor() { 
-		
+	constructor( 
+		private formBuilder: FormBuilder, 
+		private _loginService: LoginService,
+		private _tokenService: AuthorizationtokenService,
+		private router: Router) { 
+		this.formLogin = this.formBuilder.group({
+			userLogin: [null, [Validators.required, Validators.email]],
+			userPassword: [null, [Validators.required, Validators.minLength(6)]]
+		})
 	}
 
 	ngOnInit() {
-		this.formLogin = new FormGroup({
-			userLogin: new FormControl( null, Validators.required ),
-			userPassword: new FormControl( null, Validators.required )
-		});
+		
 	}
 
+	get f() { return this.formLogin.controls; }
+
 	ingresar() {
+		this.isSubmitted = true;
 		// stop here if form is invalid
-        if (this.formLogin.invalid) {
-            return;
-        }
-		console.log('ingresa')
-		console.log('form : ', this.formLogin);
+		if (this.formLogin.invalid) {
+			return;
+		}
+		const datos = this.formLogin.value;
+		if(this.formLogin.valid){
+			this._loginService.login( datos.userLogin, datos.userPassword )
+                .subscribe(
+                    response => this.handleResponse( response ),
+                    error => this.handleError( error.error )					
+                    
+                );
+		}
+
+	}
+
+	//validacion del token
+	handleResponse( data ){
+		this._tokenService.handle(data.access_token);
+		this.router.navigateByUrl('profile');
+	}
+
+	//muestra el mensaje de error al usuario
+	handleError( error:any ){
+		this.error = error.error;
 	}
 
 }
