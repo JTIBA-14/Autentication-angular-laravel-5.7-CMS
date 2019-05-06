@@ -11,6 +11,9 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { SigupComponent } from './components/sigup/sigup.component';
 import { HttpClientModule } from "@angular/common/http";
+import { BeforeLoginService } from './services/before-login.service';
+import { AfterLoginService } from './services/after-login.service';
+import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,8 @@ import { HttpClientModule } from "@angular/common/http";
     ResponseResetComponent,
     ProfileComponent,
     LogoutComponent,
-    SigupComponent
+    SigupComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +34,10 @@ import { HttpClientModule } from "@angular/common/http";
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    BeforeLoginService,
+    AfterLoginService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
